@@ -1,0 +1,1402 @@
+@charset "UTF-8";
+/*-----------------------------------------------------------------------------------
+	0. CSS Reset & Normalize
+	1. Base
+		1.1 Wrap/Container
+		1.2 Animations
+		1.3 Responsive Media (videos, iframe, screenshots...)
+		1.4 Basic Grid (2,3,4 columns)
+	2. Typography & Lists
+		2.1 Headings with background
+		2.2 Classes: .text-
+		2.3 San Francisco Font (Apple)
+	3. Header & Footer
+		3.1 Logo
+	4. Navigation
+		4.1 Navbars
+	5. SLIDES (vertically and horizontally centered)
+		5.1 Mini container & Alignment
+		5.2 Counter / Navigation Slides
+		5.3 Background Images/Video
+	6. Magic blocks = .flexblock (Flexible blocks with auto-fill and equal height).
+		6.1 .flexblock.features
+		6.2 .flexblock.clients
+		6.3 .flexblock.steps
+		6.4 .flexblock.metrics
+		6.5 .flexblock.specs
+		6.6 .flexblock.reasons
+		6.7 .flexblock.gallery
+		6.8 .flexblock.plans
+		6.9. flexblock.activity
+	7. Promos/Offers (pricing, tagline, CTA...)
+	8. Work / Resume / CV
+	9. Table of contents
+	10. Cards
+	11. Quotes
+	12. Avatars
+	13. Tables
+	14. Forms
+  15. Longform Elements
+	16. Safari Bug (flex-wrap)
+	17. Slidex index (aka zoom)
+  18. Print
+  19. Colors
+  20.Timeline
+----------------------------------------------------------------------------------- */
+/*
+=========================================
+0. CSS Reset & Normalize
+=========================================
+*/
+
+/*=========================================
+1. Base --> Baseline: 8px = .8rem
+=========================================== */
+/* -- Disable elastic scrolling/bounce:
+webslides.js will add .ws-ready automatically. Don't worry :) -- */
+.ws-ready,
+.ws-ready body {
+  height: 100%;
+  overflow: hidden;
+  width: 100%; }
+
+.ws-ready.ws-ready-zoom {
+  overflow: visible; }
+  .ws-ready.ws-ready-zoom body {
+    overflow: auto; }
+
+#webslides {
+  -ms-overflow-style: none;
+  -webkit-overflow-scrolling: touch;
+  height: 100vh;
+  overflow-x: hidden;
+  overflow-y: scroll; }
+  #webslides::-webkit-scrollbar {
+    display: none; }
+
+
+nav a[rel='external'] em,
+.hidden {
+  clip: rect(1px, 1px, 1px, 1px);
+  height: 1px;
+  overflow: hidden;
+  position: absolute;
+  width: 1px; }
+
+.shadow {
+  position: relative; }
+  .shadow:before, .shadow:after {
+    bottom: 1.6rem;
+    content: '';
+    max-width: 300px;
+    position: absolute;
+    top: 80%;
+    width: 50%;
+    z-index: -1; }
+  .shadow:after {
+    right: 2.4rem;
+    -webkit-transform: rotate(3deg);
+            transform: rotate(3deg); }
+  .shadow:before {
+    left: 2.4rem;
+    -webkit-transform: rotate(-3deg);
+            transform: rotate(-3deg); }
+
+/* === 1.2 Animations ================
+Just 5 basic animations:
+.fadeIn, .fadeInUp, .zoomIn, .slideInLeft, and .slideInRight
+https://github.com/daneden/animate.css */
+/*-- fadeIn -- */
+@-webkit-keyframes fadeIn {
+  from {
+    opacity: 0; }
+  to {
+    opacity: 1; } }
+@keyframes fadeIn {
+  from {
+    opacity: 0; }
+  to {
+    opacity: 1; } }
+
+.fadeIn {
+  -webkit-animation: fadeIn 1s;
+          animation: fadeIn 1s; }
+
+/*-- fadeInUp -- */
+@-webkit-keyframes fadeInUp {
+  from {
+    opacity: 0;
+    -webkit-transform: translate3d(0, 100%, 0);
+            transform: translate3d(0, 100%, 0); }
+  to {
+    opacity: 1;
+    -webkit-transform: none;
+            transform: none; } }
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    -webkit-transform: translate3d(0, 100%, 0);
+            transform: translate3d(0, 100%, 0); }
+  to {
+    opacity: 1;
+    -webkit-transform: none;
+            transform: none; } }
+
+.fadeInUp {
+  -webkit-animation: fadeInUp 1s;
+          animation: fadeInUp 1s; }
+
+/*-- zoomIn -- */
+@-webkit-keyframes zoomIn {
+  from {
+    -webkit-transform: scale3d(0.3, 0.3, 0.3);
+            transform: scale3d(0.3, 0.3, 0.3); }
+  50% {
+    opacity: 1; } }
+@keyframes zoomIn {
+  from {
+    -webkit-transform: scale3d(0.3, 0.3, 0.3);
+            transform: scale3d(0.3, 0.3, 0.3); }
+  50% {
+    opacity: 1; } }
+
+.zoomIn {
+  -webkit-animation: zoomIn 1s;
+          animation: zoomIn 1s; }
+
+/*-- slideInLeft -- */
+@-webkit-keyframes slideInLeft {
+  from {
+    -webkit-transform: translate3d(-100%, 0, 0);
+            transform: translate3d(-100%, 0, 0);
+    visibility: visible; }
+  to {
+    -webkit-transform: translate3d(0, 0, 0);
+            transform: translate3d(0, 0, 0); } }
+@keyframes slideInLeft {
+  from {
+    -webkit-transform: translate3d(-100%, 0, 0);
+            transform: translate3d(-100%, 0, 0);
+    visibility: visible; }
+  to {
+    -webkit-transform: translate3d(0, 0, 0);
+            transform: translate3d(0, 0, 0); } }
+
+.slideInLeft {
+  -webkit-animation: slideInLeft 1s;
+          animation: slideInLeft 1s;
+  -webkit-animation-fill-mode: both;
+          animation-fill-mode: both; }
+
+/*-- slideInRight -- */
+@-webkit-keyframes slideInRight {
+  from {
+    -webkit-transform: translate3d(100%, 0, 0);
+            transform: translate3d(100%, 0, 0);
+    visibility: visible; }
+  to {
+    -webkit-transform: translate3d(0, 0, 0);
+            transform: translate3d(0, 0, 0); } }
+@keyframes slideInRight {
+  from {
+    -webkit-transform: translate3d(100%, 0, 0);
+            transform: translate3d(100%, 0, 0);
+    visibility: visible; }
+  to {
+    -webkit-transform: translate3d(0, 0, 0);
+            transform: translate3d(0, 0, 0); } }
+
+.slideInRight {
+  -webkit-animation: slideInRight 1s;
+          animation: slideInRight 1s;
+  -webkit-animation-fill-mode: both;
+          animation-fill-mode: both; }
+
+/* Animated Background (Matrix) */
+@-webkit-keyframes anim {
+  0% {
+    -webkit-transform: translateY(0);
+            transform: translateY(0); }
+  100% {
+    -webkit-transform: translateY(-1200px);
+            transform: translateY(-1200px); } }
+@keyframes anim {
+  0% {
+    -webkit-transform: translateY(0);
+            transform: translateY(0); }
+  100% {
+    -webkit-transform: translateY(-1200px);
+            transform: translateY(-1200px); } }
+
+/* Duration */
+.slow {
+  -webkit-animation-duration: 4s;
+          animation-duration: 4s; }
+  .slow + .slow {
+    -webkit-animation-duration: 5s;
+            animation-duration: 5s; }
+
+/*=== 1.3 Responsive Media (videos, iframe...) === */
+.embed {
+  height: 0;
+  overflow: hidden;
+  /*aspect ratio:16:9*/
+  padding-bottom: 56.6%;
+  /*aspect ratio: 4:3*/
+  /*padding-bottom: 75%;*/
+  position: relative;
+  /* -- Responsive background video
+  https://fvsch.com/code/video-background/ -- */ }
+  .embed iframe,
+  .embed object,
+  .embed embed,
+  .embed video {
+    height: 100%;
+    left: 0;
+    margin: 0;
+    position: absolute;
+    top: 0;
+    width: 100%; }
+  .fullscreen > .embed {
+    bottom: 0;
+    height: auto;
+    left: 0;
+    padding-bottom: 0;
+    position: fixed;
+    right: 0;
+    top: 0;
+    /* 1. No object-fit support: */ }
+    .fullscreen > .embed > iframe,
+    .fullscreen > .embed > object,
+    .fullscreen > .embed > embed,
+    .fullscreen > .embed > video {
+      /* 2. If supporting object-fit, overriding (1): */ }
+      @media (min-aspect-ratio: 16 / 9) {
+        .fullscreen > .embed > iframe,
+        .fullscreen > .embed > object,
+        .fullscreen > .embed > embed,
+        .fullscreen > .embed > video {
+          height: 300%;
+          top: -100%; } }
+      @media (max-aspect-ratio: 16 / 9) {
+        .fullscreen > .embed > iframe,
+        .fullscreen > .embed > object,
+        .fullscreen > .embed > embed,
+        .fullscreen > .embed > video {
+          left: -100%;
+          width: 300%; } }
+      @supports ((-o-object-fit: cover) or (object-fit: cover)) {
+        .fullscreen > .embed > iframe,
+        .fullscreen > .embed > object,
+        .fullscreen > .embed > embed,
+        .fullscreen > .embed > video {
+          height: 100%;
+          left: 0;
+          -o-object-fit: cover;
+             object-fit: cover;
+          top: 0;
+          width: 100%; } }
+
+
+
+
+/*========================================
+5. SLIDES (Full Screen)
+Vertically and horizontally centered
+============================================== */
+/* Fade transition to all slides.
+* = All HTML elements will have those styles.*/
+.work-time  * {
+  -webkit-animation: fadeIn .6s ease-in-out;
+          animation: fadeIn .6s ease-in-out; }
+
+.work-time  .background,
+.work-time  .light,
+.work-time  .dark {
+  -webkit-animation-duration: 0s;
+          animation-duration: 0s; }
+
+/*=== Section = Slide === */
+.work-time,
+.slide {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  min-height: 100vh;
+  /*Fullscreen*/
+  /* Prototyping? min-height: 720px (Baseline: 8px = .8rem)*/
+  padding: 2.4rem;
+  /*Fixed/Visible header? padding-top: 12rem; */
+  page-break-after: always;
+  position: relative;
+  word-wrap: break-word; }
+  @media (min-width: 1024px) {
+    .work-time,
+    .slide {
+      padding-bottom: 12rem;
+      padding-top: 12rem; } }
+
+/*slide with no padding (full card, .embed youtube video...) */
+.fullscreen {
+  padding: 0;
+  /* Fixed/Visible header?
+  padding:8.2rem 0 0 0;
+  */ }
+
+/* slide alignment - top */
+.slide-top {
+  -webkit-box-pack: start;
+      -ms-flex-pack: start;
+          justify-content: flex-start; }
+
+/* slide alignment - bottom */
+.slide-bottom {
+  -webkit-box-pack: end;
+      -ms-flex-pack: end;
+          justify-content: flex-end; }
+
+
+
+/*=== Background with a frame === */
+/*<span class="background" style="background-image:url('image.jpg')"></span>
+<span class="background frame"></span>*/
+[class*='background'].frame {
+  margin: 2.4rem; }
+
+/* === 5.2 Counter / Navigation Slides  === */
+#navigation {
+  -webkit-animation: fadeIn 8s;
+          animation: fadeIn 8s;
+  bottom: 0;
+  left: 0;
+  margin-left: auto;
+  margin-right: auto;
+  opacity: 0;
+  position: fixed;
+  right: 0;
+  width: 24.4rem;
+  /* hover/visibility */
+  z-index: 4; }
+  #navigation:hover {
+    opacity: 1; }
+  #navigation p {
+    margin-bottom: 0; }
+
+#counter {
+  display: block;
+  line-height: 4.8rem;
+  margin-left: auto;
+  margin-right: auto;
+  position: relative;
+  text-align: center;
+  width: 10rem; }
+  #counter a:hover {
+    padding: .8rem; }
+
+a#next,
+a#previous {
+  border-radius: .4rem;
+  cursor: pointer;
+  font-size: 2.4rem;
+  height: 4rem;
+  padding: .8rem;
+  position: absolute;
+  text-align: center;
+  width: 4rem; }
+
+a#next {
+  right: 3.2rem; }
+
+a#previous {
+  left: 3.2rem; }
+
+@media (max-width: 1024px) {
+  #navigation {
+    -webkit-animation: fadeIn 6s;
+            animation: fadeIn 6s;
+    background: url("../images/swipe.svg") no-repeat center top;
+    background-size: 4.8rem; }
+  #navigation a,
+  #counter {
+    display: none; } }
+
+/*===============================================================
+6. Magic blocks with flexbox (Auto-fill & Equal Height)
+Blocks Links li>a = .flexblock.blink (.blink required)
+================================================================= */
+.flexblock {
+  clear: both;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -ms-flex-wrap: wrap;
+      flex-wrap: wrap;
+  margin-left: auto;
+  margin-right: auto;
+  padding: 0; }
+  .flexblock:after {
+    clear: both; }
+  .flexblock:before {
+    content: '';
+    display: table; }
+  .flexblock li,
+  .flexblock.blink li > a {
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-box-orient: vertical;
+    -webkit-box-direction: normal;
+        -ms-flex-direction: column;
+            flex-direction: column;
+    margin: 0;
+    padding: 2.4rem;
+    position: relative; }
+  .flexblock li {
+    -webkit-box-flex: 1;
+        -ms-flex: auto;
+            flex: auto;
+    text-align: left;
+    -webkit-transition: .3s;
+    transition: .3s;
+    width: 100%; }
+    .flexblock li:hover {
+      -webkit-transform: translateY(-0.2rem);
+              transform: translateY(-0.2rem); }
+    @media (min-width: 600px) {
+      .flexblock li {
+        width: 50%; } }
+    @media (min-width: 1024px) {
+      .flexblock li {
+        width: 25%; } }
+  .flexblock.aligncenter li {
+    text-align: center; }
+  .flexblock.vertical-align li {
+    -webkit-box-pack: center;
+        -ms-flex-pack: center;
+            justify-content: center; }
+  .flexblock.blink li {
+    padding: 0; }
+  .flexblock li h2 svg,
+  .flexblock li h3 svg {
+    margin-top: 0; }
+
+h1 + .flexblock,
+h2 + .flexblock,
+h3 + .flexblock,
+div + ul,
+div + ol {
+  margin-top: 3.2rem; }
+
+.flexblock li h2,
+.flexblock li h3,
+footer .column h2,
+footer .column h3 {
+  font-size: 1.8rem;
+  font-weight: 600;
+  line-height: 3.2rem;
+  margin-bottom: 0; }
+
+.flexblock li li,
+.flexblock.blink li li {
+  padding: 0;
+  width: 100%; }
+
+[class*='content-'] .flexblock li p {
+  font-size: 1.8rem;
+  line-height: 3.2rem; }
+
+.content-right .flexblock.features li,
+.content-left .flexblock.features li {
+  width: 46%; }
+
+/*====================================================================
+6.1 Features <ul class="flexblock features">
+====================================================================== */
+.flexblock.features > li {
+  border-radius: .4rem;
+  margin-bottom: 4.8rem;
+  width: 100%; }
+
+.flexblock.features li h2 {
+  text-transform: uppercase; }
+
+.flexblock.features li span {
+  font-weight: 300; }
+
+.flexblock.features li p {
+  margin: 0; }
+
+.flexblock.features li p em {
+  display: block; }
+
+.flexblock.features li span,
+.flexblock.features li svg {
+  display: block;
+  font-size: 6.4rem;
+  line-height: 1;
+  margin: 0; }
+
+.flexblock.features li img {
+  width: 6.4rem; }
+
+.flexblock.features li span sup {
+  font-size: 3rem; }
+
+@media (min-width: 1200px) {
+  .flexblock.features li span,
+  .flexblock.features li svg,
+  .flexblock.features li img {
+    float: left;
+    margin-right: .8rem; } }
+
+@media (min-width: 768px) {
+  .flexblock.features {
+    margin-left: -2%;
+    margin-right: -2%; }
+  .flexblock.features > li {
+    margin-left: 2%;
+    margin-right: 2%;
+    width: 29%; }
+  .size-50 .flexblock.features > li {
+    width: 46%; }
+  .column .flexblock.features > li {
+    width: 100%; }
+  footer .flexblock.features > li {
+    margin-bottom: 0; } }
+
+/*=====================================================================
+6.2 Clients Logos <ul class="flexblock clients">
+======================================================================= */
+.flexblock.clients.blink li > a,
+.flexblock.clients li {
+  padding: 0; }
+
+.flexblock.clients li figcaption {
+  padding: 0 2.4rem 2.4rem; }
+
+.flexblock.clients.border li figcaption {
+  padding-top: 2.4rem; }
+
+.clients.blink li > a,
+.clients li {
+  -webkit-box-pack: inherit;
+      -ms-flex-pack: inherit;
+          justify-content: inherit; }
+
+.clients li img,
+.clients li svg {
+  display: block;
+  padding: 2.4rem; }
+
+.clients.border li img,
+.clients.border li svg {
+  display: block;
+  margin-left: auto;
+  margin-right: auto; }
+
+.clients li:hover {
+  z-index: 1; }
+
+/*==================================================
+6.3 flexblock.steps <ul class="flexblock steps">
+About, Philosophy...
+=================================================== */
+.steps li {
+  width: 100%; }
+  .steps li img,
+  .steps li span {
+    display: block;
+    margin: 0 auto .8rem; }
+  .steps li span {
+    font-size: 6.4rem; }
+  @media (min-width: 768px) {
+    .steps li {
+      width: 50%; } }
+
+@media (min-width: 1024px) {
+  .steps li {
+    width: 25%; }
+  .process {
+    border-left-style: solid;
+    border-left-width: 15px;
+    height: 0;
+    left: 0;
+    position: absolute;
+    top: 60px;
+    width: 0; } }
+
+/*=================================================
+6.4 Block Numbers - <ul class="flexblock metrics">
+=================================================== */
+.metrics li {
+  text-align: center;
+  width: 100%; }
+  @media (min-width: 568px) {
+    .metrics li {
+      width: 50%; } }
+  @media (min-width: 1024px) {
+    .metrics li {
+      width: 25%; } }
+
+.metrics li strong {
+  display: block; }
+
+.metrics li span,
+.metrics li svg {
+  display: block;
+  font-size: 6.4rem;
+  line-height: 7.2rem;
+  margin: 0 auto; }
+
+.card-50 .metrics li {
+  width: 50%; }
+
+/*=====================================================
+6.5 Specs/Items: <ul class="flexblock specs">
+======================================================= */
+.specs li {
+  text-align: left;
+  width: 100%; }
+  .specs li:after {
+    bottom: -2.4rem;
+    content: '';
+    display: block;
+    height: 1px;
+    position: relative; }
+  .specs li:hover {
+    -webkit-transform: translateX(0.2rem);
+            transform: translateX(0.2rem); }
+  .specs li span,
+  .specs li svg {
+    display: block;
+    font-size: 6.4rem;
+    line-height: 1;
+    margin: 0; }
+  .specs li img {
+    width: 6.4rem; }
+  .specs li span {
+    font-weight: 300; }
+    .specs li span sup {
+      font-size: 3rem; }
+  @media (min-width: 1024px) {
+    .specs li span,
+    .specs li svg,
+    .specs li img {
+      float: left;
+      margin-right: 2.4rem; } }
+
+/*=================================================
+6.6 Reasons/Why/Numbers (counter-increment)
+<ul class="flexblock reasons">
+=================================================== */
+.flexblock.reasons li {
+  counter-increment: list;
+  text-align: left;
+  width: 100%; }
+  .flexblock.reasons li:hover {
+    -webkit-transform: translateY(-0.2rem);
+            transform: translateY(-0.2rem); }
+  .flexblock.reasons li:after {
+    bottom: -2.4rem;
+    content: '';
+    display: block;
+    height: 1px;
+    position: relative; }
+  .flexblock.reasons li:before {
+    content: counter(list) ".";
+    font-size: 6.4rem;
+    line-height: 1; }
+  @media (min-width: 768px) {
+    .flexblock.reasons li {
+      padding-left: 8.8rem;
+      /* You need two digits? (1-10)*/
+      /*padding-left: 12rem; */ }
+      .flexblock.reasons li:before {
+        left: 2.4rem;
+        position: absolute; } }
+
+/*=================================================
+6.7 Gallery - <ul class="flexblock gallery">
+Block Thumbnails li+.overlay+image
+img size recommended:800x600px
+=================================================== */
+.flexblock.gallery li {
+  margin-bottom: 4.8rem; }
+  .flexblock.gallery li:nth-child(n+4) {
+    -webkit-box-flex: inherit;
+        -ms-flex: inherit;
+            flex: inherit; }
+  .flexblock.gallery li figcaption {
+    padding: 1.6rem;
+    position: relative; }
+    .flexblock.gallery li figcaption:before {
+      content: '';
+      height: 0;
+      left: 20%;
+      margin-left: -.5em;
+      position: absolute;
+      top: .4rem;
+      -webkit-transform: rotate(135deg);
+              transform: rotate(135deg);
+      -webkit-transform-origin: 0 0;
+              transform-origin: 0 0;
+      -webkit-transition: .1s;
+      transition: .1s;
+      width: 0; }
+  .flexblock.gallery li:hover figcaption:before {
+    top: .3rem; }
+
+.aligncenter .flexblock.gallery li figcaption:before {
+  left: 55%;
+  margin-left: 0; }
+
+.flexblock.gallery li,
+.flexblock.gallery.blink li > a {
+  padding: 0; }
+
+.flexblock.gallery h2 {
+  text-transform: uppercase; }
+
+.flexblock.gallery h2 + p,
+.flexblock.gallery h3 + p {
+  margin-top: .8rem; }
+
+.flexblock.gallery p {
+  font-size: 1.6rem;
+  line-height: 2.4rem;
+  margin-bottom: 0; }
+
+.flexblock.gallery li footer {
+  margin-top: .8rem;
+  padding: 1.2rem 0 0;
+  position: relative; }
+
+.flexblock.gallery li img {
+  display: block;
+  margin-left: auto;
+  margin-right: auto; }
+
+@media (min-width: 600px) {
+  .flexblock.gallery {
+    margin-left: -2%;
+    margin-right: -2%; }
+    .flexblock.gallery li {
+      margin-left: 2%;
+      margin-right: 2%;
+      width: 46%; } }
+
+@media (min-width: 1024px) {
+  .flexblock.gallery li {
+    width: 21%; }
+  .grid.sm .flexblock.gallery li,
+  .grid.ms .flexblock.gallery li {
+    width: 29%; }
+  .grid.sms .flexblock.gallery li {
+    width: 46%; } }
+
+.overlay {
+  bottom: 0;
+  cursor: pointer;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  height: 100%;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  left: 0;
+  opacity: 1;
+  position: absolute;
+  right: 0;
+  top: 0;
+  -webkit-transition: all .3s linear;
+  transition: all .3s linear;
+  width: 100%;
+  z-index: 2; }
+
+li .overlay {
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center; }
+
+li .overlay h2 {
+  letter-spacing: .2rem;
+  margin: 0;
+  padding: 0 2.4rem;
+  text-align: center;
+  text-transform: uppercase;
+  width: 100%; }
+
+.overlay p,
+.overlay time {
+  margin-bottom: 0; }
+
+li:hover .overlay {
+  cursor: pointer; }
+
+/*===============================================
+6.8 Plans / Pricing <ul class="flexblock plans">
+================================================= */
+.flexblock.plans > li {
+  border-radius: 3px;
+  margin-bottom: 4.8rem;
+  text-align: center;
+  z-index: 1; }
+
+.flexblock.plans li,
+.flexblock.plans.blink li > a {
+  padding: 0; }
+
+.flexblock.plans.blink li > a div,
+.flexblock.plans li div {
+  padding-bottom: 3.2rem; }
+
+.flexblock.plans li p,
+.flexblock.plans li h2 {
+  padding: .8rem 3.2rem; }
+
+.flexblock.plans li h2 {
+  float: left;
+  font-weight: 400;
+  letter-spacing: .1rem;
+  text-transform: uppercase;
+  width: 100%; }
+
+.flexblock.plans .price {
+  clear: both;
+  display: block;
+  font-size: 4.8rem;
+  font-weight: 400;
+  line-height: 6.2rem;
+  padding: 2.4rem; }
+  .flexblock.plans .price sup {
+    font-size: 1.8rem;
+    margin-right: .4rem; }
+  .flexblock.plans .price li ul {
+    margin-bottom: 2.4rem; }
+
+.flexblock.plans li ul li {
+  display: block;
+  padding: .8rem 3.2rem;
+  text-align: left;
+  width: 100%; }
+
+@media (min-width: 1024px) {
+  .flexblock.plans {
+    margin-left: -2%;
+    margin-right: -2%; }
+    .flexblock.plans > li {
+      margin-left: 2%;
+      margin-right: 2%;
+      width: 29%; }
+    .flexblock.plans > li:hover,
+    .flexblock.plans > li:nth-child(2) {
+      position: relative;
+      -webkit-transform: scale(1.08);
+              transform: scale(1.08);
+      z-index: 2; }
+    .flexblock.plans:hover li:nth-child(2):not(:hover) {
+      position: relative;
+      -webkit-transform: scale(1);
+              transform: scale(1);
+      z-index: 1; } }
+
+/*===========================================
+6.9 Block Activity <ul class="activity">
+CV / News
+============================================= */
+.flexblock.activity {
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column; }
+  .flexblock.activity li {
+    -webkit-box-flex: 1;
+        -ms-flex: 1;
+            flex: 1;
+    position: relative;
+    width: auto; }
+  .flexblock.activity p {
+    margin-bottom: 0;
+    vertical-align: top; }
+  .flexblock.activity img {
+    display: block; }
+  .flexblock.activity .year,
+  .flexblock.activity .title {
+    display: inline;
+    font-weight: 600; }
+  .flexblock.activity .summary {
+    width: 100%; }
+  .flexblock.activity .title {
+    margin-left: 1rem; }
+  @media (min-width: 768px) {
+    .flexblock.activity p {
+      float: left; }
+    .flexblock.activity .year {
+      width: 15%; }
+    .flexblock.activity .title {
+      margin-left: 4%;
+      margin-right: 4%;
+      width: 27%; }
+    .flexblock.activity .summary {
+      width: 50%; } }
+
+/*=============================================
+7. Promos/Offers (pricing, tagline, CTA...)
+=============================================== */
+.cta {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -ms-flex-wrap: wrap;
+      flex-wrap: wrap;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center; }
+
+.number,
+.cta .benefit {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  max-width: 100%;
+  padding: .8rem; }
+
+.number {
+  text-align: center;
+  font-size: 100px; color: #694cb7 }
+
+.cta .benefit {
+  max-width: 100%;
+  text-align: center; }
+
+.benefit h3{
+  margin-bottom: 10px;  }
+.benefit h3 svg{
+  margin-right: 10px; display: inline-block; }
+
+.benefit li, .benefit p{
+  list-style: none; margin: 10px 0 20px 0; padding: ; font-size: 21px;  line-height: 30px;  }
+
+.number span {
+  display: block;
+  font-size: 8rem;
+  line-height: 8rem; }
+
+.number span sup {
+  font-size: 4rem; }
+
+.cta p {
+  margin-bottom: 0; }
+
+@media (min-width: 768px) {
+  .number,
+  .cta .benefit {
+    max-width: 50%;
+    padding: 4.8rem; }
+  .cta .benefit {
+    text-align: left; }
+  .number span {
+    font-size: 16rem;
+    line-height: 16rem; }
+    .number span sup {
+      font-size: 6rem;
+      vertical-align: middle; } }
+
+/*=========================================
+8. Work/Resumé/CV <ul class="work">
+=========================================== */
+.work {
+  clear: both;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  text-align: left; }
+  h1 + .work,
+  h2 + .work,
+  h3 + .work,
+  p + .work {
+    margin-top: 4.8rem; }
+  .work li {
+    -webkit-box-flex: 1;
+        -ms-flex: 1;
+            flex: 1;
+    list-style: none;
+    margin: 0;
+    position: relative; }
+  .work p {
+    margin-bottom: 0;
+    -webkit-transition: .3s;
+    transition: .3s; }
+  .work li a {
+    display: block;
+    float: left;
+    height: 100%;
+    padding: 2.4rem 0;
+    width: 100%; }
+  .work li p {
+    padding-left: 1.2rem; }
+  .work li.work-label p {
+    padding-left: 0; }
+  .work li a:hover p:first-child {
+    padding-left: 1.6rem; }
+  .work li p:last-child {
+    position: absolute;
+    right: 1.2rem;
+    top: 2.4rem; }
+  .work li.work-label p:last-child {
+    right: 0;
+    top: 0; }
+  .work-label {
+    float: left;
+    font-weight: 600;
+    padding: 0 0 2.4rem;
+    width: 100%; }
+  .work-title {
+    display: block;
+    padding-right: 1.2rem;
+    width: 75%; }
+
+@media (min-width: 768px) {
+  .work-label p,
+  .work li p {
+    float: left;
+    margin-right: 2%;
+    width: 25%; }
+  .work li.work-label p:last-child,
+  .work li p:last-child {
+    float: right;
+    margin-right: 0;
+    padding-right: 1.2rem;
+    position: relative;
+    right: auto;
+    text-align: right;
+    top: auto; }
+  .work li p.work-date {
+    width: 120px; } }
+
+@media (max-width: 768px) {
+  .work-client,
+  .work-label .work-services {
+    clip: rect(1px, 1px, 1px, 1px);
+    height: 1px;
+    overflow: hidden;
+    position: absolute;
+    width: 1px; } }
+
+.chapter {
+  display: inline-block;
+  font-size: 1.8rem;
+  line-height: 3.2rem;
+  padding-right: .8rem; }
+
+.toc-page {
+  float: right; }
+
+.fullscreen [class*='card-'],
+.fullscreen [class*='card-'] > a {
+  min-height: 100vh; }
+
+.flex-content,
+[class*='card'] blockquote {
+  padding: 2.4rem;
+  position: relative; }
+
+[class*='card-'] .flex-content,
+[class*='card-'] blockquote {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center; }
+
+.flex-content p {
+  position: relative; }
+
+
+/*=========================================
+16. SAFARI BUGS (flex-wrap)
+Solution: stackoverflow.com/questions/34250282/flexbox-safari-bug-flex-wrap
+=========================================== */
+.flexblock:before,
+.flexblock:after,
+.grid:before,
+.grid:after,
+.cta:before,
+.cta:after {
+  width: 0; }
+
+/*==============================================
+18. Slides Index: Thumbnails navigation gallery
+================================================ */
+#webslides-zoomed {
+  -ms-flex-line-pack: start;
+      align-content: flex-start;
+  -webkit-box-align: start;
+      -ms-flex-align: start;
+          align-items: flex-start;
+  -webkit-box-orient: horizontal;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: row;
+          flex-direction: row;
+  -webkit-box-pack: start;
+      -ms-flex-pack: start;
+          justify-content: flex-start;
+  min-height: 100vh;
+  position: relative;
+  z-index: 2; }
+  #webslides-zoomed.disabled {
+    left: -100000px;
+    position: absolute; }
+  #webslides-zoomed .slide {
+    height: 400%;
+    width: 400%; }
+    @media screen and (orientation: portrait), screen and (max-width: 768px) and (orientation: landscape) {
+      #webslides-zoomed .slide {
+        height: 200%;
+        width: 200%; } }
+    @media (max-aspect-ratio: 2 / 3) {
+      #webslides-zoomed .slide {
+        height: 200%;
+        width: 200%; } }
+  @media (min-width: 1024px) {
+    #webslides-zoomed > .wrap {
+      padding-bottom: 12rem;
+      padding-top: 12rem; } }
+  #webslides-zoomed > .wrap > .grid > .column {
+    -ms-flex-item-align: auto;
+        align-self: auto;
+    -webkit-box-flex: 0;
+        -ms-flex: 0 1 auto;
+            flex: 0 1 auto;
+    -webkit-box-ordinal-group: 1;
+        -ms-flex-order: 0;
+            order: 0;
+    position: relative;
+    width: 25%; }
+    @media screen and (max-width: 567px) {
+      #webslides-zoomed > .wrap > .grid > .column {
+        width: 100%; } }
+    @media screen and (min-width: 568px) and (max-width: 1024px) {
+      #webslides-zoomed > .wrap > .grid > .column {
+        width: 50%; } }
+    @media screen and (max-width: 567px) and (orientation: portrait) {
+      #webslides-zoomed > .wrap > .grid > .column {
+        width: 100%; } }
+    #webslides-zoomed > .wrap > .grid > .column > .wrap-zoom {
+      border-radius: .3rem;
+      display: inline-block;
+      height: 25vh;
+      overflow: hidden;
+      position: relative;
+      -webkit-transition: .3s;
+      transition: .3s; }
+      @media screen and (max-width: 567px) {
+        #webslides-zoomed > .wrap > .grid > .column > .wrap-zoom {
+          height: 50vh; } }
+      @media screen and (min-width: 568px) and (max-width: 1023px) {
+        #webslides-zoomed > .wrap > .grid > .column > .wrap-zoom {
+          height: 33vh; } }
+      @media screen and (orientation: portrait) {
+        #webslides-zoomed > .wrap > .grid > .column > .wrap-zoom {
+          height: 50vw; } }
+      #webslides-zoomed > .wrap > .grid > .column > .wrap-zoom:hover {
+        -webkit-transform: scale(1.02);
+                transform: scale(1.02);
+        z-index: 2; }
+      #webslides-zoomed > .wrap > .grid > .column > .wrap-zoom.current {
+        -webkit-transform: scale(1.08);
+                transform: scale(1.08); }
+    #webslides-zoomed > .wrap > .grid > .column > .wrap-zoom > .zoom-layer {
+      background: transparent;
+      cursor: pointer;
+      height: 100%;
+      position: absolute;
+      width: 100%; }
+  #webslides-zoomed .column > .wrap-zoom > .slide {
+    clip: rect(0 auto auto 0);
+    display: -webkit-box !important;
+    display: -ms-flexbox !important;
+    display: flex !important;
+    left: 0;
+    position: absolute;
+    top: 0;
+    -webkit-transform: scale(0.25) translate(-150%, -150vh);
+            transform: scale(0.25) translate(-150%, -150vh); }
+    @media screen and (orientation: portrait), screen and (max-width: 768px) and (orientation: landscape) {
+      #webslides-zoomed .column > .wrap-zoom > .slide {
+        -webkit-transform: scale(0.5) translate(-50%, -50%);
+                transform: scale(0.5) translate(-50%, -50%); } }
+    @media (max-aspect-ratio: 2 / 3) {
+      #webslides-zoomed .column > .wrap-zoom > .slide {
+        -webkit-transform: scale(0.5) translate(-50%, -50%);
+                transform: scale(0.5) translate(-50%, -50%); } }
+  #webslides-zoomed .column {
+    opacity: 0;
+    -webkit-transform: scale(1.2);
+            transform: scale(1.2);
+    -webkit-transition: opacity .4s, -webkit-transform .4s;
+    transition: opacity .4s, -webkit-transform .4s;
+    transition: opacity .4s, transform .4s;
+    transition: opacity .4s, transform .4s, -webkit-transform .4s;
+    -webkit-transition-delay: .2s;
+            transition-delay: .2s; }
+  #webslides-zoomed.in .column {
+    opacity: 1;
+    -webkit-transform: scale(1);
+            transform: scale(1); }
+
+.text-slide-number {
+  display: inline-block;
+  margin: .8rem auto;
+  text-align: center; }
+
+#webslides {
+  -webkit-transition: -webkit-filter .3s;
+  transition: -webkit-filter .3s;
+  transition: filter .3s;
+  transition: filter .3s, -webkit-filter .3s; }
+  #webslides.disabled, #webslides.zooming {
+    position: fixed;
+    width: 100%;
+    z-index: 0; }
+  #webslides.disabled {
+    /*
+    filter: blur(10px);
+    transform: scale(1.1);
+    */
+    /* Blur makes scroll no accesible */
+    width: calc(100% - 10px); }
+/*===================================================
+.flexblock li hover/active
+===================================================== */
+.flexblock li.active a,
+.metrics li:hover,
+.specs li:hover,
+.reasons li:hover {
+  background-color: rgba(0, 20, 80, 0.03); }
+
+/*=========================================
+Features & Clients List
+=========================================== */
+.features li,
+.clients li {
+  background-color: rgba(255, 255, 255, 0.9); }
+
+[class*='bg-'] .features li,
+[class*='bg-'] .clients li {
+  background-color: rgba(255, 255, 255, 0.1); }
+
+.features li:hover,
+.clients li:hover {
+  -webkit-box-shadow: 0 8px 16px rgba(0, 20, 80, 0.02), 0 4px 16px rgba(0, 0, 0, 0.08);
+          box-shadow: 0 8px 16px rgba(0, 20, 80, 0.02), 0 4px 16px rgba(0, 0, 0, 0.08); }
+
+/*============================
+.flexblock with border
+============================== */
+.border {
+  border-bottom: 1px solid rgba(0, 20, 80, 0.1);
+  border-right: 1px solid rgba(0, 20, 80, 0.1); }
+
+.border li {
+  border-left: 1px solid rgba(0, 20, 80, 0.1);
+  border-top: 1px solid rgba(0, 20, 80, 0.1); }
+
+.flexblock.border li li {
+  border: 0; }
+
+/*===========================================
+flexblock.steps
+============================================= */
+.steps li:nth-child(1) {
+  background-color: #e8eef7; }
+
+.steps li:nth-child(2) {
+  background-color: #dde5f3; }
+
+.steps li:nth-child(3) {
+  background-color: #cdd8ec; }
+
+.steps li:nth-child(4) {
+  background-color: #bbcdec; }
+
+.process {
+  border-bottom: 15px solid transparent;
+  border-top: 15px solid transparent; }
+
+.steps li:hover,
+.steps.blink li:hover > a {
+  background-color: #b8cef7; }
+
+@media (min-width: 1024px) {
+  .process.step-2 {
+    border-left-color: #e8eef7; }
+  .process.step-3 {
+    border-left-color: #dde5f3; }
+  .process.step-4 {
+    border-left-color: #cdd8ec; }
+  .steps li:hover + li [class*='step-'] {
+    border-left-color: #b8cef7; } }
+
+/*============================
+Activity/CV/Timeline/News
+============================== */
+.activity li {
+  border-top: 0.1rem solid rgba(0, 20, 80, 0.1); }
+
+.activity li:hover {
+  background-color: rgba(0, 20, 80, 0.02); }
+
+
+/*============================
+Slides Index
+============================== */
+#webslides-zoomed {
+  background: rgba(0, 10, 40, 0.8); }
+
+#webslides-zoomed .column > .wrap-zoom {
+  background-color: #f7f9fb;
+  -webkit-box-shadow: 0 1px 1px rgba(0, 0, 0, 0.2), 0 4px 8px rgba(0, 0, 0, 0.04);
+          box-shadow: 0 1px 1px rgba(0, 0, 0, 0.2), 0 4px 8px rgba(0, 0, 0, 0.04);
+  color: #333; }
+  #webslides-zoomed .column > .wrap-zoom:hover {
+    -webkit-box-shadow: 0 1px 1px rgba(0, 0, 0, 0.2), 0 4px 8px rgba(0, 0, 0, 0.08);
+            box-shadow: 0 1px 1px rgba(0, 0, 0, 0.2), 0 4px 8px rgba(0, 0, 0, 0.08); }
+  #webslides-zoomed .column > .wrap-zoom.current {
+    border: 0.6rem solid rgba(0, 20, 255, 0.2); }
+
+.text-slide-number {
+  color: #abc; }
+
+
+
+
+
