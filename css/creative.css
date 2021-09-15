@@ -1339,21 +1339,24 @@ fieldset[disabled] .btn-primary.active {
     background-color: #faf8f8;
     position: relative;
 }
-.quote p{
-    font-size: 75px;
-    font-family: 'Poppins', sans-serif;
-    font-weight: 100;
-    line-height: 74px;
-    text-transform: uppercase;
+.quote-wrap{
     height: 90vh;
     display: grid;
     align-content: center;
     padding-left: 10%;
 }
+.quote p, .quote h2{
+    font-size: 75px;
+    font-family: 'Poppins', sans-serif;
+    font-weight: 100;
+    line-height: 74px;
+    text-transform: uppercase;
+    
+}
 .quote p span{
     display: block;
 }
-.quote p span.text1{
+.quote h2.text1{
     color: #fd8378;
 }
 .quote p span.text2{
