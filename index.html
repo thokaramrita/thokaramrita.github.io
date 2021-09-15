@@ -233,7 +233,7 @@
                             <div class="swiper-slide-content">
                                 <div class="swiper-title">
                                     <a href="#">
-					    <svg xmlns="https://www.w3.org/2000/svg" viewBox="0 0 394.8 80.4" width="250" height="50" style="margin-left: 15px">
+					    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 394.8 80.4" width="250" height="50" style="margin-left: 15px">
 						    <defs>
 						    <style>.cls-1{fill:#000;}</style>
 						    </defs>
@@ -593,12 +593,14 @@
             <div  class="container">
                 <div class="row">
                     <div class="col-md-10 aos-init aos-animate" data-aos="zoom-in">    
-                       <p >
-                        <span class="text1" >Holla at me</span>
-                        If you need any
-                        professional
-                        <span class="text2">help <i class='bx bx-heart'></i></span>  
-                    </p>
+                       <div class="quote-wrap">
+                            <h2 class="text1" >Holla at me</h2>
+                            <p >
+                            If you need any
+                            professional<br>
+                            <span class="text2">help <i class='bx bx-heart'></i></span>  
+                            </p>
+                        </div>
                     </div>
                 </div>
             </div>        
@@ -617,22 +619,22 @@
                     <form class="mb-5" method="post" id="contactForm" name="contactForm">
                       <div class="row">
                         <div class="col-md-6 form-group mb-5">
-                          <label for="" class="col-form-label">Name *</label>
+                          <label for="name" class="col-form-label">Name *</label>
                           <input type="text" class="form-control" name="name" id="name" placeholder="Your name">
                         </div>
                         <div class="col-md-6 form-group mb-5">
-                          <label for="" class="col-form-label">Email *</label>
+                          <label for="email" class="col-form-label">Email *</label>
                           <input type="text" class="form-control" name="email" id="email"  placeholder="Your email">
                         </div>
                       </div>
 
                       <div class="row">
                         <div class="col-md-6 form-group mb-5">
-                          <label for="" class="col-form-label">Phone</label>
+                          <label for="phone" class="col-form-label">Phone</label>
                           <input type="text" class="form-control" name="phone" id="phone"  placeholder="Phone #">
                         </div>
                         <div class="col-md-6 form-group mb-5">
-                          <label for="" class="col-form-label">Company</label>
+                          <label for="company" class="col-form-label">Company</label>
                           <input type="text" class="form-control" name="company" id="company"  placeholder="Company  name">
                         </div>
                       </div>
@@ -651,7 +653,7 @@
                       </div>
                     </form>
 
-                    <div id="form-message-warning mt-4"></div> 
+                    <div id="form-message-warning"></div> 
                     <div id="form-message-success">
                       <p>Your message was sent </p>
                         <h3>Will be intouch with you soon, thank you!</h3>
@@ -711,7 +713,7 @@
    <script src='https://unpkg.com/popper.js'></script>
 <script src='https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.0.0-beta/js/bootstrap.min.js'></script><script  src="js/art-gallery.js"></script>
  
-    <script type="text/javascript">
+    <script>
         
         AOS.init();
         
