@@ -3607,6 +3607,7 @@
   #sidebar .custom-menu {
     display: inline-block;
     position: sticky;
+    position: -webkit-sticky;
     top: 20px;
     left: 21px;
     
