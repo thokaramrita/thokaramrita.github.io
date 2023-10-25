@@ -1372,7 +1372,7 @@ fieldset[disabled] .btn-primary.active {
 
 
 #contact .justify-content-md-center{
-    height: 90vh;
+    height: 100%;
     align-content: center;
 }
 #contact .section-heading{
